@@ -15,7 +15,7 @@
   <body class="bg-light">
     <div class="container mt-5">
       <h1 class="text-center">Learning Handlebars</h1>
-      <p class="text-center text-muted">Step 3: Template inside a script tag</p>
+      <p class="text-center text-muted">Step 4: Conditional Rendering</p>
       <!-- Inject HB Content -->
       <div id="content" class="mt-4"></div>
       <div id="skills" class="mt-4"></div>
@@ -35,6 +35,12 @@
           <li class="list-group-item">{{this}}</li>
         {{/each}}
       </ul>
+      {{#if isExperienced}}
+        <p class="mt-3 text-success fw-bold">✅ This developer is experienced!</p>
+      {{else}}
+        <p class="mt-3 text-warning fw-bold">⚠️This developer is just starting
+          out</p>
+      {{/if}}
     </script>
   </body>
 
@@ -60,11 +66,11 @@
     document.getElementById("content").innerHTML = greetinglHTML;
 
     // SKILLS
-
     const skillsSource = document.getElementById("skills-template").innerHTML;
     const skillsTemplate = Handlebars.compile(skillsSource);
     const skillsData = {
       skills: ["JavaScript", "HTML", "CSS", "Handlebars", "Bootstrap"],
+      isExperienced: true,
     };
     const skillsHTML = skillsTemplate(skillsData);
     document.getElementById("skills").innerHTML = skillsHTML;
