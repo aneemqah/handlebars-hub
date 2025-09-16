@@ -16,35 +16,57 @@
     <div class="container mt-5">
       <h1 class="text-center">Learning Handlebars</h1>
       <p class="text-center text-muted">Step 3: Template inside a script tag</p>
-      <!-- Inject Content -->
-      <div id="content" class="mt-4"></id>
+      <!-- Inject HB Content -->
+      <div id="content" class="mt-4"></div>
+      <div id="skills" class="mt-4"></div>
     </div>
 
-    <!-- Handlebars template -->
+    <!-- Greetings Template -->
     <script id="greeting-template" type="text/x-handlebars-template">
-        <h2 class="text-success">Hello, {{name}}!</h2>
-        <p class="lead">Welcome to Handlebars templating</p>
+      <h2 class="text-success">Hello, {{name}}!</h2>
+      <p class="lead">Welcome to Handlebars templating</p>
+    </script>
+
+    <!-- Skills Template -->
+    <script id="skills-template" type="text/x-handlebars-template">
+      <h3 class="mt-4">Developer Skills</h3>
+      <ul class="list-group">
+        {{#each skills}}
+          <li class="list-group-item">{{this}}</li>
+        {{/each}}
+      </ul>
     </script>
   </body>
 
   <script>
     // Step 1: Grab the template from the dome
-    const templateString = document.getElementById("greeting-template").innerHTML;
+    const greetingSource =
+      document.getElementById("greeting-template").innerHTML;
 
     // Step 2: Turn the template string into a reusable function
     // This "compiles" the template so it can process data
-    const compiledTemplate = Handlebars.compile(templateString);
+    const greetingTemplate = Handlebars.compile(greetingSource);
 
     // Step 3: Create the data object that will fill the placeholders
     // The property names must match the placeholder names in the template
-    const dataToInsert = { name: "Developer" };
+    const greetingData = { name: "Developer" };
 
     // Step 4: Use the compiled template function to generate final HTML
     // Pass in the data and get back HTML with placeholders filled in
-    const finalHTML = compiledTemplate(dataToInsert);
+    const greetinglHTML = greetingTemplate(greetingData);
 
     // Step 5: Put the generated HTML into the webpage
     // Find the element with id="content" and replace its contents
-    document.getElementById("content").innerHTML = finalHTML;
+    document.getElementById("content").innerHTML = greetinglHTML;
+
+    // SKILLS
+
+    const skillsSource = document.getElementById("skills-template").innerHTML;
+    const skillsTemplate = Handlebars.compile(skillsSource);
+    const skillsData = {
+      skills: ["JavaScript", "HTML", "CSS", "Handlebars", "Bootstrap"],
+    };
+    const skillsHTML = skillsTemplate(skillsData);
+    document.getElementById("skills").innerHTML = skillsHTML;
   </script>
 </html>
