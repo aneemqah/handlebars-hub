@@ -9,11 +9,37 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Handlebars CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
   </head>
   <body class="bg-light">
     <div class="container mt-5">
       <h1 class="text-center">Learning Handlebars</h1>
-      <p class="text-center text-muted">Step 1: Just HTML + Bootstrap</p>
+      <p class="text-center text-muted">Step 2: Render a simple template</p>
+      <!-- Inject Content -->
+      <div id="content" class="mt-4"></id>
     </div>
   </body>
+
+  <script>
+    // Step 1: Create a template string with placeholders
+    // {{name}} is a placeholder that will be replaced with actual data
+    const templateString = "<h2>Hello, {{name}}!</h2>";
+
+    // Step 2: Turn the template string into a reusable function
+    // This "compiles" the template so it can process data
+    const compiledTemplate = Handlebars.compile(source);
+
+    // Step 3: Create the data object that will fill the placeholders
+    // The property names must match the placeholder names in the template
+    const dataToInsert = { name: "World" };
+
+    // Step 4: Use the compiled template function to generate final HTML
+    // Pass in the data and get back HTML with placeholders filled in
+    const finalHTML = compiledTemplate(dataToInsert);
+
+    // Step 5: Put the generated HTML into the webpage
+    // Find the element with id="content" and replace its contents
+    document.getElementById("content").innerHTML = finalHTML;
+  </script>
 </html>
