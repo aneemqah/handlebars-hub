@@ -15,24 +15,29 @@
   <body class="bg-light">
     <div class="container mt-5">
       <h1 class="text-center">Learning Handlebars</h1>
-      <p class="text-center text-muted">Step 2: Render a simple template</p>
+      <p class="text-center text-muted">Step 3: Template inside a script tag</p>
       <!-- Inject Content -->
       <div id="content" class="mt-4"></id>
     </div>
+
+    <!-- Handlebars template -->
+    <script id="greeting-template" type="text/x-handlebars-template">
+        <h2 class="text-success">Hello, {{name}}!</h2>
+        <p class="lead">Welcome to Handlebars templating</p>
+    </script>
   </body>
 
   <script>
-    // Step 1: Create a template string with placeholders
-    // {{name}} is a placeholder that will be replaced with actual data
-    const templateString = "<h2>Hello, {{name}}!</h2>";
+    // Step 1: Grab the template from the dome
+    const templateString = document.getElementById("greeting-template").innerHTML;
 
     // Step 2: Turn the template string into a reusable function
     // This "compiles" the template so it can process data
-    const compiledTemplate = Handlebars.compile(source);
+    const compiledTemplate = Handlebars.compile(templateString);
 
     // Step 3: Create the data object that will fill the placeholders
     // The property names must match the placeholder names in the template
-    const dataToInsert = { name: "World" };
+    const dataToInsert = { name: "Developer" };
 
     // Step 4: Use the compiled template function to generate final HTML
     // Pass in the data and get back HTML with placeholders filled in
