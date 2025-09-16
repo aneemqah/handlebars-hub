@@ -15,10 +15,11 @@
   <body class="bg-light">
     <div class="container mt-5">
       <h1 class="text-center">Learning Handlebars</h1>
-      <p class="text-center text-muted">Step 4: Conditional Rendering</p>
+      <p class="text-center text-muted">Step 5: Nested Object Rendering</p>
       <!-- Inject HB Content -->
       <div id="content" class="mt-4"></div>
       <div id="skills" class="mt-4"></div>
+      <div id="profile" class="mt-4"></div>
     </div>
 
     <!-- Greetings Template -->
@@ -41,6 +42,29 @@
         <p class="mt-3 text-warning fw-bold">⚠️This developer is just starting
           out</p>
       {{/if}}
+    </script>
+
+    <!-- Developer Profile -->
+    <script id="profile-template" type="text/x-handlebars-template">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">{{profile.name}}</h3>
+          <h5 class="card-subtitle mb-2 text-muted">{{profile.role}}</h5>
+          <p class="card-text">
+            {{profile.name}}
+            has
+            {{profile.experience}}
+            years of experience as a
+            {{profile.role}}.
+          </p>
+          <h6>Top Skills:</h6>
+          <ul class="list-group">
+            {{#each profile.skills}}
+              <li class="list-group-item">{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
     </script>
   </body>
 
@@ -74,5 +98,19 @@
     };
     const skillsHTML = skillsTemplate(skillsData);
     document.getElementById("skills").innerHTML = skillsHTML;
+
+    //PROFILE
+    const profileSource = document.getElementById("profile-template").innerHTML;
+    const profileTemplate = Handlebars.compile(profileSource);
+    const profileData = {
+      profile: {
+        name: "Meena Haque",
+        role: "Frontend Developer",
+        experience: 5,
+        skills: ["JavaScript", "HTML", "CSS", "Handlebars", "Bootstrap"],
+      },
+    };
+    const profileHTML = profileTemplate(profileData);
+    document.getElementById("profile").innerHTML = profileHTML;
   </script>
 </html>
